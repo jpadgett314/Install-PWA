@@ -8,11 +8,11 @@
 	function onSubmit(event) {
 		const formData = new FormData(event.target)
 
-		const url = formData.get('website-url')
+		const url = new URL(formData.get('website-url'))
+		
+		const url_without_protocol = url.host + url.pathname.replace(/\/$/, "")
 
-		const domain = new URL(url).hostname
-
-		goto(`/from/${encodeURIComponent(domain)}`)
+		goto(`/from/${encodeURIComponent(url_without_protocol)}`)
 	}
 </script>
 
